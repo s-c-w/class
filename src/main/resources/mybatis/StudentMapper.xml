@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="realize.student.mapper.StudentMapper">
+    <select id="getStudent" parameterType="String" resultType="Student">
+        select stu_name,stu_no,stu_telephone,stu_birth,stu_sex,stu_age
+        from student
+        where stu_no=#{stuNo}
+    </select>
+
+    <resultMap id="CourseMessage" type="Course">
+        <id property="courseNo" column="course_no"/>
+        <result property="courseName" column="course_name"/>
+        <result property="courseCredit" column="course_credit"/>
+        <result property="courseTeacher" column="course_teacher"/>
+        <collection property="courseWeekTimes" ofType="CourseWeekTime">
+            <result property="courseWeek" column="course_week"/>
+            <result property="courseTime" column="course_time"/>
+            <result property="courseNum" column="course_num"/>
+        </collection>
+    </resultMap>
+    <select id="getCourse" parameterType="String" resultMap="CourseMessage">
+        select c.course_no, c.course_name,c.course_credit,c.course_place,c.course_teacher,w.course_week,w.course_time,w.course_num
+        from course c
+        join course_week_time w
+        on c.course_no=w.course_no
+        join stu_course s
+        on c.course_no=s.course_no
+        where s.stu_no=#{stuNo}
+    </select>
+</mapper>

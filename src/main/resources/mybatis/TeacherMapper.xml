@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="realize.teacher.mapper.TeacherMapper">
+    <resultMap id="TeacherMessage" type="Teacher">
+        <id property="teacherNo" column="teacher_no"/>
+        <result property="teacherName" column="teacher_name"/>
+        <collection property="courseList" ofType="Course">
+            <id property="courseNo" column="course_no"/>
+            <result property="courseName" column="course_name"/>
+            <result property="courseCredit" column="course_credit"/>
+            <result property="coursePlace" column="course_place"/>
+            <result property="courseTeacher" column="course_teacher"/>
+            <collection property="courseWeekTimes" ofType="CourseWeekTime">
+                <id property="courseWeek" column="course_week"/>
+                <result property="courseTime" column="course_time"/>
+                <result property="courseNum" column="course_num"/>
+            </collection>
+        </collection>
+    </resultMap>
+    <select id="getTeacher" parameterType="Teacher" resultType="Teacher">
+        select teacher_no,teacher_name
+        from teacher
+        where teacher_no=#{teacherNo} and teacher_name=#{teacherName}
+    </select>
+
+    <select id="getCourse" resultMap="TeacherMessage">
+        select t.teacher_no,t.teacher_name,c.course_no,c.course_name,c.course_credit,c.course_place,w.course_time,w.course_week,w.course_num
+        from teacher t
+        join course c
+        on t.teacher_name=c.course_teacher and t.teacher_no=#{teacherNo}
+        join course_week_time w
+        on c.course_no=w.course_no ;
+    </select>
+    <select id="getStudent" resultType="Student" parameterType="String">
+        select distinct s.stu_name,s.stu_no,s.stu_telephone,s.stu_birth,s.stu_sex,s.stu_age
+        from teacher
+        join stu_course c
+        on teacher.course_no = c.course_no and teacher_no=#{stuNo}
+        join student s
+        on s.stu_no=c.stu_no;
+    </select>
+</mapper>

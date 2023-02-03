@@ -1,0 +1,28 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    username: root
+    password: scw432504
+    url: jdbc:mysql://localhost:3306/class?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+  thymeleaf:
+    cache: false
+    mode: HTML
+    prefix: classpath:templates/
+    suffix: .html
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+    throw-exception-if-no-handler-found: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+mybatis:
+  mapper-locations: mybatis/*.xml
+  type-aliases-package: realize.*.dao
+  configuration:
+    map-underscore-to-camel-case: true  #驼峰转换，java里是驼峰命名，数据库是下划线，可以把下划线自动转成驼峰命名
+logging:
+  level:
+    twoGroup: debug
