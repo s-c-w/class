@@ -8,4 +8,8 @@ import java.util.List;
 public interface StudentMapper {
     Student getStudent(String stuNo);
     List<Course> getCourse(String stuNo);
+
+    void sign(String stuNo,String courseNo ,String courseMessage );
+
+    void solitaire(String stuNo, String courseMessage, String courseNo);
 }

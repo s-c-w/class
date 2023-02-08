@@ -21,4 +21,14 @@ public class StudentServiceImpl implements StudentService{
     public List<Course> getCourse(String stuNo) {
         return studentMapper.getCourse(stuNo);
     }
+
+    @Override
+    public void sign(String stuNo,String courseNo, String courseMessage) {
+        studentMapper.sign(stuNo,courseNo,courseMessage);
+    }
+
+    @Override
+    public void solitaire(String stuNo, String courseMessage, String courseNo) {
+        studentMapper.solitaire(stuNo,courseMessage,courseNo);
+    }
 }

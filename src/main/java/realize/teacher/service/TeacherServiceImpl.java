@@ -26,4 +26,24 @@ public class TeacherServiceImpl implements TeacherService{
     public List<Student> getStudent(String teacherNo) {
         return teacherMapper.getStudent(teacherNo);
     }
+
+    @Override
+    public void begin(String courseNo) {
+        teacherMapper.begin(courseNo);
+    }
+
+    @Override
+    public void end(String courseNo) {
+        teacherMapper.end(courseNo);
+    }
+
+    @Override
+    public List<Student> sign(String courseNo) {
+        return teacherMapper.sign(courseNo);
+    }
+
+    @Override
+    public List<Student> solitaire(String courseNo) {
+        return teacherMapper.solitaire(courseNo);
+    }
 }

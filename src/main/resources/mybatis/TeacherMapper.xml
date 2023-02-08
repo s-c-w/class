@@ -41,4 +41,24 @@
         join student s
         on s.stu_no=c.stu_no;
     </select>
+    <update id="begin" parameterType="String">
+        update course
+        set course_state='已上课'
+    </update>
+    <update id="end" parameterType="String">
+        update course
+        set course_state='已下课'
+    </update>
+    <select id="sign" parameterType="String" resultType="Student">
+        select s.stu_name,c.stu_no
+        from `sign-01` c
+        join student s
+        on c.course_no=#{courseNo} and c.stu_no=s.stu_no
+    </select>
+    <select id="solitaire" parameterType="String" resultType="Student">
+        select s.stu_name,c.stu_no
+        from `solitaire-01` c
+        join student s
+        on c.course_no=#{courseNo} and c.stu_no=s.stu_no;
+    </select>
 </mapper>

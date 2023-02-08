@@ -29,4 +29,12 @@
         on c.course_no=s.course_no
         where s.stu_no=#{stuNo}
     </select>
+    <insert id="sign">
+        insert into `sign-01`
+        values(#{0},#{1},#{2})
+    </insert>
+    <insert id="solitaire">
+        insert into `solitaire-01`
+        values(#{0},#{1},#{2})
+    </insert>
 </mapper>

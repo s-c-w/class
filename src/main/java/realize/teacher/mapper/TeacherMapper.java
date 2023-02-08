@@ -10,4 +10,12 @@ public interface TeacherMapper {
     List<Teacher> getCourse(String teacherNo);
 
     List<Student> getStudent(String teacherNo);
+
+    void begin(String courseNo);
+
+    void end(String courseNo);
+
+    List<Student> sign(String courseNo);
+
+    List<Student> solitaire(String courseNo);
 }
